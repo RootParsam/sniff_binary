@@ -1,0 +1,10 @@
+from scapy.all import *
+
+def capture_packets(interface):
+    sniff(iface=interface, store=False, prn=process_packet)
+
+def process_packet(packet):
+    if packet.haslayer(Raw):
+        print(packet[Raw].load)
+
+capture_packets("Wi-Fi")
